@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebaseInit";
 import { useSelector } from "react-redux";
+import CartDropdown from "../cart-dropdown/CartDropdown";
+import CartIcon from "../cart-icon/CartIcon";
 
 function Header() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -33,7 +35,9 @@ function Header() {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      <CartDropdown />
     </div>
   );
 }

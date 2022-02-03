@@ -14,7 +14,6 @@ import SignInSignUpPage from "./pages/signin-signup/SignInSignUpPage";
 function App() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
-
   const authSub = useRef();
 
   useEffect(() => {
