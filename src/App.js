@@ -10,6 +10,7 @@ import { getDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./redux/user/userActions";
 import SignInSignUpPage from "./pages/signin-signup/SignInSignUpPage";
+import CheckoutPage from "./pages/checkout/checkout.component";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,9 +38,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/shop" component={ShopPage} />
+        <Route path="/shop" component={ShopPage} />
         <Route
-          exact
           path="/signin"
           render={() =>
             currentUser ? (
@@ -49,6 +49,7 @@ function App() {
             )
           }
         />
+        <Route path="/checkout" component={CheckoutPage} />
         <Route render={() => <Redirect to={{ pathname: "/signin" }} />} />
       </Switch>
     </div>

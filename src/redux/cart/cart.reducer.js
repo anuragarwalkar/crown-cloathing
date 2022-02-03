@@ -1,8 +1,35 @@
-import { ADD_ITEM, TOGGLE_CART_HIDDEN } from "./cart.types";
+import {
+  ADD_ITEM,
+  CLEAR_ITEM,
+  REMOVE_ITEM,
+  TOGGLE_CART_HIDDEN,
+} from "./cart.types";
 
 const INITIAL_STATE = {
   hidden: true,
   cartItems: [],
+};
+
+const removeItemFromCart = (cartItems, cartItemId) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemId
+  );
+
+  console.log(existingCartItem);
+
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter((item) => item.id !== cartItemId);
+  }
+
+  return cartItems.map((item) => {
+    if (item.id === cartItemId) {
+      return {
+        ...item,
+        quantity: item.quantity - 1,
+      };
+    }
+    return item;
+  });
 };
 
 const addItemToCart = (cartItems, cartItemToAdd) => {
@@ -40,6 +67,18 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: addItemToCart(oldCartItems, action.payload),
+      };
+
+    case CLEAR_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+      };
+
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
       };
 
     default:
