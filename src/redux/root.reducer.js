@@ -3,6 +3,8 @@ import cartReducer from "./cart/cart.reducer";
 import userReducer from "./user/user.reducer";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { persistReducer } from "redux-persist";
+import directoryReducer from "./directory/directory.reducer";
+import shopReducer from "./shop/shop.reducer";
 
 const perssistConfig = {
   key: "root",
@@ -10,6 +12,11 @@ const perssistConfig = {
   whitelist: ["cart"],
 };
 
-const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
+const rootReducer = combineReducers({
+  user: userReducer,
+  cart: cartReducer,
+  directory: directoryReducer,
+  shop: shopReducer,
+});
 
 export default persistReducer(perssistConfig, rootReducer);
