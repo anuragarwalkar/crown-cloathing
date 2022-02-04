@@ -1,8 +1,8 @@
 import React from "react";
-import Directory from "../components/directory.component";
+import Directory from "../../components/directory.component";
 import "./homepageStyles.scss";
 
-function HomePage(props) {
+function HomePage() {
   return (
     <div className="homepage">
       <Directory />
