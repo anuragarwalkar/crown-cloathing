@@ -3,10 +3,9 @@ import React, { useEffect, useRef } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/HeaderComponent";
-import { auth, createUserProfileDocument } from "./firebaseInit";
-import { getDoc } from "firebase/firestore";
+import { auth } from "./firebaseInit";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "./redux/user/userActions";
+import { setCurrentUserInit } from "./redux/user/user.actions";
 import SignInSignUpPage from "./pages/signin-signup/SignInSignUpPage";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import ShopPage from "./pages/shop/shop-page.component";
@@ -20,9 +19,7 @@ function App() {
   useEffect(() => {
     authSub.current = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        const userRef = await createUserProfileDocument(user);
-        const savedUser = await getDoc(userRef);
-        dispatch(setCurrentUser({ id: savedUser.id, ...savedUser.data() }));
+        dispatch(setCurrentUserInit(user));
       }
     });
 
