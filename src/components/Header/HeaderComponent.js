@@ -9,8 +9,11 @@ import CartIcon from "../cart-icon/CartIcon";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { useContext } from "react";
+import CurrentUserContext from "../../context/user/user.context";
 
-function Header({ hidden, currentUser }) {
+function Header({ hidden }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const onLogout = () => {
     auth.signOut();
   };
