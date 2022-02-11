@@ -10,12 +10,10 @@ const INITIAL_STATE = {
   cartItems: [],
 };
 
-const removeItemFromCart = (cartItems, cartItemId) => {
+export const removeItemFromCart = (cartItems, cartItemId) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === cartItemId
   );
-
-  console.log(existingCartItem);
 
   if (existingCartItem.quantity === 1) {
     return cartItems.filter((item) => item.id !== cartItemId);
@@ -54,6 +52,10 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
 
+export const uClearItemFromCart = (cartItems, id) => {
+  return cartItems.filter((item) => item.id !== id);
+};
+
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case TOGGLE_CART_HIDDEN:
@@ -73,7 +75,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
     case CLEAR_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+        cartItems: uClearItemFromCart(state.cartItems, action.payload),
       };
 
     case REMOVE_ITEM:

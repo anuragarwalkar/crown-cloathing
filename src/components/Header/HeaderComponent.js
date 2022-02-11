@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./headerComponentStyles.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";

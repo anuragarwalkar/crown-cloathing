@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 import { createContext } from "react";
-import { addItemToCart } from "../../redux/cart/cart.reducer";
+import {
+  addItemToCart,
+  removeItemFromCart,
+  uClearItemFromCart,
+} from "../../redux/cart/cart.reducer";
 
 export const CartContext = createContext({
   hidden: true,
@@ -26,6 +30,20 @@ function CartProvider({ children }) {
     setCartItems(newCartItems);
   };
 
+  const removeItem = (id) => {
+    const newCartItems = removeItemFromCart(cartItems, id);
+    const count = newCartItems.reduce((a, b) => b.quantity + a, 0);
+    setCartItemsCount(count);
+    setCartItems(newCartItems);
+  };
+
+  const clearItemFromCart = (id) => {
+    const newCartItems = uClearItemFromCart(cartItems, id);
+    const count = newCartItems.reduce((a, b) => b.quantity + a, 0);
+    setCartItemsCount(count);
+    setCartItems(newCartItems);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -34,6 +52,8 @@ function CartProvider({ children }) {
         cartItems,
         addItem,
         cartItemsCount,
+        removeItem,
+        clearItemFromCart,
       }}
     >
       {children}
