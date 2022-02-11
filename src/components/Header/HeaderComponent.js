@@ -7,13 +7,11 @@ import CartDropdown from "../cart-dropdown/CartDropdown";
 import CartIcon from "../cart-icon/CartIcon";
 import { useContext } from "react";
 import CurrentUserContext from "../../context/user/user.context";
-import CartContext from "../../context/cart/cart.context";
+import { CartContext } from "../../providers/cart/cart.provider";
 
 function Header() {
   const { currentUser } = useContext(CurrentUserContext);
-  const [hidden, setHidden] = useState(true);
-
-  const toggleHidden = () => setHidden((_hidden) => !_hidden);
+  const { hidden } = useContext(CartContext);
 
   const onLogout = () => {
     auth.signOut();
@@ -40,9 +38,8 @@ function Header() {
             SIGN IN
           </Link>
         )}
-        <CartContext.Provider value={{ toggleHidden, hidden }}>
-          <CartIcon />
-        </CartContext.Provider>
+
+        <CartIcon />
       </div>
       <CartDropdown hidden={hidden} />
     </div>

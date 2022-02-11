@@ -32,8 +32,9 @@ const removeItemFromCart = (cartItems, cartItemId) => {
   });
 };
 
-const addItemToCart = (cartItems, cartItemToAdd) => {
+export const addItemToCart = (cartItems, cartItemToAdd) => {
   const existingItem = cartItems.some((item) => cartItemToAdd.id === item.id);
+
   if (existingItem) {
     return cartItems.map((item) => {
       if (item.id === cartItemToAdd.id) {

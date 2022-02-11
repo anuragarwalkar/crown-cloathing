@@ -1,25 +1,23 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { toggleCartHidden } from "../../redux/cart/cart.action";
-import { selectCartItems } from "../../redux/cart/cart.selectors";
+import { CartContext } from "../../providers/cart/cart.provider";
 import CartItem from "../cart-item/CartItem";
 import CustomButton from "../custom-button/CustomButton";
 import "./cartDropdownStyles.scss";
 
-function CartDropdown({ hidden: cartIconHidden }) {
+function CartDropdown() {
+  const { hidden, toggleHidden, cartItems } = useContext(CartContext);
+
   const history = useHistory();
-  const dispatch = useDispatch();
-  const cartItems = useSelector(selectCartItems);
 
   const checkout = () => {
-    dispatch(toggleCartHidden());
+    toggleHidden();
     history.push("/checkout");
   };
 
   return (
-    <div className={`cart-dropdown ${cartIconHidden ? "hidden" : ""}`}>
+    <div className={`cart-dropdown ${hidden ? "hidden" : ""}`}>
       <div className="cart-items">
         {cartItems.length ? (
           cartItems.map((item) => {
