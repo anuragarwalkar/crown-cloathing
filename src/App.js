@@ -2,7 +2,7 @@ import "./App.scss";
 import React, { useEffect, useRef } from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
-import Header from "./components/Header/HeaderComponent";
+import HeaderComponent from "./components/header/HeaderComponent";
 import { auth, createUserProfileDocument } from "./firebaseInit";
 import { getDoc } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <HeaderComponent />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
